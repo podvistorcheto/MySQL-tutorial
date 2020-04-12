@@ -1,0 +1,42 @@
+mysql> source test.sql
+ERROR: 
+Failed to open file 'test.sql', error: 2
+mysql> source test.sql
++----------+
+| count(*) |
++----------+
+|     3503 |
++----------+
+1 row in set (0.00 sec)
+
++----------+
+| count(*) |
++----------+
+|      275 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from Album limit 5;
++---------+---------------------------------------+----------+
+| AlbumId | Title                                 | ArtistId |
++---------+---------------------------------------+----------+
+|       1 | For Those About To Rock We Salute You |        1 |
+|       2 | Balls to the Wall                     |        2 |
+|       3 | Restless and Wild                     |        2 |
+|       4 | Let There Be Rock                     |        1 |
+|       5 | Big Ones                              |        3 |
++---------+---------------------------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select Title, Name from Album
+    -> join Artist in Album.ArtistID = Artist.ArtistId
+    -> limit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in Album.ArtistID = Artist.ArtistId
+limit 5' at line 2
+mysql> select Title, Name from Album
+    -> join Artist in Album.ArtistId = Artist.ArtistId
+    -> limit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in Album.ArtistId = Artist.ArtistId
+limit 5' at line 2
+mysql> select Title, Name from Album join Artist in Album.ArtistId = Artist.ArtistId limit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'in Album.ArtistId = Artist.ArtistId limit 5' at line 1
